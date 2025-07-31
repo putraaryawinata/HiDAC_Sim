@@ -48,8 +48,8 @@ sudo apt install libogre-1.9-dev
 ### Quick Build
 ```bash
 # Clone and build
-git clone <repository-url>
-cd HiDac
+git clone https://github.com/putraaryawinata/HiDAC_Sim
+cd HiDAC_Sim
 make all
 ```
 
