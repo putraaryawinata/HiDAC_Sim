@@ -1,0 +1,146 @@
+# Compiled executables
+crowdsim
+orca_demo
+enhanced_crowdsim
+simple_orca_demo
+
+# Object files
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+
+# Compiled static libraries
+*.a
+*.lib
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Core dumps
+core
+core.*
+*.core
+
+# Temporary files
+*~
+*.tmp
+*.temp
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Build directories
+build/
+bin/
+obj/
+debug/
+release/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.vcxproj*
+*.sln
+*.suo
+*.user
+*.aps
+*.pch
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.log
+
+# Log files
+*.log
+*.out
+*.err
+ogre.log
+Ogre.log
+
+# OGRE specific files
+ogre.cfg
+plugins.cfg.bak
+resources.cfg.bak
+
+# Test outputs and temporary data
+test_output/
+temp_data/
+*.test
+test_*.txt
+output_*.json
+
+# Screenshots and recordings
+screenshot*.png
+recording*.avi
+*.bmp
+*.tga
+
+# Backup files
+*.bak
+*.backup
+*_backup
+*.orig
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Dependency directories (if using package managers)
+vendor/
+third_party/downloaded/
+
+# Documentation build artifacts
+docs/_build/
+*.pdf.bak
+
+# Performance profiling files
+*.prof
+gmon.out
+perf.data*
+
+# Memory debugging
+valgrind.log
+*.valgrind
+
+# CMake (if added later)
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile.cmake
+
+# Autotools (if added later)
+autom4te.cache/
+config.h
+config.status
+configure
+Makefile.in
+aclocal.m4
+
+# Package files
+*.tar.gz
+*.zip
+*.rar
+*.7z
+
+# Local configuration overrides
+local_config.json
+user_settings.json
+debug_config.json
+
+# Miscellaneous
+json_test
+json_test_manual
+json_test_sys
+test_minimal
