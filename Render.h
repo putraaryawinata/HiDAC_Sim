@@ -73,22 +73,22 @@ class DrawObject {
 
 class DrawAgent : public DrawObject {
  private: 
-  Agent::Agent * a;
+  Agent * a;
 
  public: 
   DrawAgent();
-  DrawAgent(Agent::Agent * a, string meshname);
+  DrawAgent(Agent * a, string meshname);
 
   void update();
 };
 
 class DrawWall : public DrawObject {
  private: 
-  Wall::Wall * w;
+  Wall * w;
   
  public: 
   DrawWall();
-  DrawWall( Wall::Wall * wall, string meshname);
+  DrawWall( Wall * wall, string meshname);
 
   void update();
 
@@ -129,8 +129,8 @@ class Render {
   //generates a unique name from the current render context
   string generateName();
 
-  void drawThis( Agent::Agent * a, string meshname);
-  void drawThis( Wall::Wall * w, string meshname);
+  void drawThis( Agent * a, string meshname);
+  void drawThis( Wall * w, string meshname);
 
   //updates i.e. renders to the screen
   void update(float deltaTime);

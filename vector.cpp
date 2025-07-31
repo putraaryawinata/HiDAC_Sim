@@ -124,3 +124,13 @@ void v2fEpsilon( v2f v){
     v[1] = 0.0;
   return;
 }
+
+// Additional vector operations for ORCA
+float v2fLenSq( v2f v ){
+  return v[0] * v[0] + v[1] * v[1];
+}
+
+void v2fCross2D( v2f v, v2f result ){
+  result[0] = -v[1];
+  result[1] = v[0];
+}

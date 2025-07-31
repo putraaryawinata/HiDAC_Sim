@@ -2,7 +2,7 @@
 #define _CONSTANTS_H_
 
 #include <math.h> 
-#include <jsoncpp/value.h>
+#include <json/value.h>
 #include <iostream>
 
 #define MY_EPSILON 0.0005
@@ -27,6 +27,10 @@ float v2fCross( v2f v1, v2f v2);
 void v2fTangent( v2f v, v2f ret );
 
 void v2fNegate( v2f v);
+
+// Additional vector operations for ORCA
+float v2fLenSq( v2f v );
+void v2fCross2D( v2f v, v2f result );
 
 
 void v2fSub( v2f v1, v2f v2, v2f res );

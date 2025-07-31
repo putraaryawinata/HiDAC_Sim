@@ -2,7 +2,7 @@
 #define _CROWD_H_
 
 #include "constants.h"
-#include <jsoncpp/value.h>
+#include <json/value.h>
 
 enum objtype {AGENT, 
 	      WALL,
@@ -21,8 +21,9 @@ class CrowdObject {
   objtype myType;
 
  public: 
-  CrowdObject( Json::Value c );
+  CrowdObject( const Json::Value& c );
   CrowdObject( );
+  virtual ~CrowdObject() {}  // Add virtual destructor
   //returns whether the object is visible within the vision rectangle presented
   virtual bool isVisible( v2f pos, v2f dir, float vislength, float viswidth);
 

@@ -1,0 +1,29 @@
+{
+  "simulation": {
+    "mode": "dataset",
+    "dataset": {
+      "filename": "eth_hotel.txt",
+      "format": "eth",
+      "frameRate": 2.5,
+      "pixelToMeter": 0.05
+    },
+    "playback": {
+      "realtime": true,
+      "loop": false,
+      "startFrame": 0,
+      "endFrame": -1
+    }
+  },
+  "visualization": {
+    "showTrajectories": true,
+    "trajectoryLength": 50,
+    "showVelocities": true,
+    "agentColors": "by_id"
+  },
+  "analysis": {
+    "exportTrajectories": true,
+    "outputFile": "simulation_output.json",
+    "calculateMetrics": true,
+    "groundTruthFile": "eth_hotel_gt.txt"
+  }
+}

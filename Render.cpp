@@ -8,13 +8,13 @@ DrawObject::DrawObject ( string meshname){
 }
 
 void DrawObject::createEntity( string meshname ){
-  Render::Render * r = Render::getInstance();
+  Render * r = Render::getInstance();
   entity = r->newEntity( r->generateName(), meshname );
   node = r->attach( r->generateName(), entity);
   return;
 }
 
-DrawAgent::DrawAgent( Agent::Agent * ag, string mesh ) : DrawObject(mesh){
+DrawAgent::DrawAgent( Agent * ag, string mesh ) : DrawObject(mesh){
   a = ag;
   float r = a->getRadius();
   node->setScale( Ogre::Vector3( r / 2.0, 1.0, r / 2.0) ); 
@@ -34,7 +34,7 @@ void DrawAgent::update(){
 
 
 
-DrawWall::DrawWall( Wall::Wall * wall, string meshname) : DrawObject( meshname ){
+DrawWall::DrawWall( Wall * wall, string meshname) : DrawObject( meshname ){
   w = wall;
   v2f wv, e, s, n, center;
   w->getStart(s);
@@ -82,12 +82,11 @@ void setupResourceLocations()
          typeName = i->first;
          archName = i->second;
 	 Ogre::ResourceGroupManager::getSingleton().addResourceLocation(archName, typeName, secName);
-	 Ogre::ResourceGroupManager::getSingleton().initialiseResourceGroup( secName );
       }
-
    }
 
-  Ogre::MaterialManager::getSingleton().initialise();
+  // Initialize all resource groups at once to avoid threading conflicts
+  Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 }
 
 
@@ -97,7 +96,7 @@ Render::Render(){
   root = new Ogre::Root( "config/plugins.cfg" , "config/ogre.cfg", "Ogre.log");
 
   if( !root->restoreConfig() )
-    root->showConfigDialog();
+    root->showConfigDialog(NULL);
   Ogre::RenderWindow * w = root->initialise( true, "Rendering!");
   w->setVisible( true );
   setupResourceLocations();
@@ -189,13 +188,13 @@ void Render::update( float f) {
 }
 */
 
-void Render::drawThis( Agent::Agent * a, string m ){
-  DrawAgent::DrawAgent * da = new DrawAgent( a, m);
+void Render::drawThis( Agent * a, string m ){
+  DrawAgent * da = new DrawAgent( a, m);
   drawObjects.push_back( da );
 }
 
-void Render::drawThis( Wall::Wall * w, string meshname){
-  DrawWall::DrawWall * dw = new DrawWall( w, meshname);
+void Render::drawThis( Wall * w, string meshname){
+  DrawWall * dw = new DrawWall( w, meshname);
   drawObjects.push_back( dw );
 }
 

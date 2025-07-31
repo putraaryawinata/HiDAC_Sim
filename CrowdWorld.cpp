@@ -1,11 +1,11 @@
 #include "CrowdWorld.h"
 
 CrowdWorld::CrowdWorld(){
-  Render::Render * r = Render::getInstance();
+  Render * r = Render::getInstance();
 }
 
 //adds the new CrowdObject(s) to the end of the vector
-void CrowdWorld::createNewObject(Json::Value v){
+void CrowdWorld::createNewObject(const Json::Value& v){
   std::string s = v["type"].asString();
   std::string fa = "fallen agent";
   std::string a = "attractor";
@@ -13,12 +13,19 @@ void CrowdWorld::createNewObject(Json::Value v){
   std::string ag = "agent";
   std::string ob = "obstacle";
   if (s.compare(w) == 0){
-    Wall::Wall* ws = twoWalls(v);
-
-    objectList.push_back( ws );
-    objectList.push_back( &(ws[1]) );
-    Render::Render * r = Render::getInstance();
-    r->drawThis(ws, "wall.mesh");
+    v2f st, en;
+    st[0] = v["start"][0u].asDouble();
+    st[1] = v["start"][1u].asDouble();
+    en[0] = v["end"][0u].asDouble();
+    en[1] = v["end"][1u].asDouble();
+    
+    Wall* w1 = new Wall(st, en);
+    Wall* w2 = new Wall(en, st);
+    
+    objectList.push_back( w1 );
+    objectList.push_back( w2 );
+    Render * r = Render::getInstance();
+    r->drawThis(w1, "wall.mesh");
     return;
   }
   if (s.compare(ag) == 0){
@@ -30,13 +37,13 @@ void CrowdWorld::createNewObject(Json::Value v){
 
 }
 
-CrowdWorld::CrowdWorld( Json::Value w ){
+CrowdWorld::CrowdWorld( const Json::Value& w ){
 
-  Render::Render * r = Render::getInstance();
+  Render * r = Render::getInstance();
   //loading from file
   int numAgents = w["agents"].size();
   for(int i = 0; i < numAgents ; i++ ){
-    Agent::Agent * a = new Agent(w["agents"][i]);
+    Agent * a = new Agent(w["agents"][i]);
     agentList.push_back( a );
     r->drawThis(a, a->getMesh());
   }
@@ -53,7 +60,7 @@ CrowdWorld::CrowdWorld( Json::Value w ){
 }
 
 CrowdWorld::~CrowdWorld(){
-  Render::Render * r = Render::getInstance();
+  Render * r = Render::getInstance();
   r->destroyInstance();
 }
 
@@ -114,7 +121,7 @@ void CrowdWorld::print(){
 }
 
 void CrowdWorld::render(){
-  Render::Render * r = Render::getInstance();
+  Render * r = Render::getInstance();
   //requires a float, but that shouldn't affect anything
   r->update(0.1);
 

@@ -6,7 +6,7 @@
 #include <math.h>
 #include <cmath>
 #include <vector>
-#include <jsoncpp/value.h>
+#include <json/value.h>
 #include <iostream>
 #include <cstdlib>
 #include "constants.h"
@@ -91,6 +91,7 @@ class Agent : public CrowdObject {
 
   float getPersonalSpace();
   float getRadius();
+  float getMaxVelocity() const { return maxVelocity; }
 
   void getPos( v2f ret );
   void setPos( v2f set );
@@ -105,14 +106,14 @@ class Agent : public CrowdObject {
   float getDistance( v2f pos );
   void getDirection( v2f pos, v2f res);
  
-  void calcAgentForce( CrowdObject::CrowdObject * a , v2f ret);
+  void calcAgentForce( CrowdObject * a , v2f ret);
   void calculateForces( );
 
   void applyForces( float deltaT );
 
   //functions to update visibility and collision vectors
-  void checkCollide( CrowdObject::CrowdObject * c );
-  void checkVisible( CrowdObject::CrowdObject * c );
+  void checkCollide( CrowdObject * c );
+  void checkVisible( CrowdObject * c );
 
   //function to 'reset' at the end of a simulation step 
   void reset();

@@ -3,29 +3,30 @@
 #include "Wall.h"
 #include "Render.h"
 #include <vector>
-#include <jsoncpp/value.h>
+#include <json/value.h>
 
 class CrowdWorld {
- private:
+ protected:
   std::vector<Agent * > agentList;
   std::vector<CrowdObject * > objectList;
   
-  void createNewObject(Json::Value v);
+ private:
+  void createNewObject(const Json::Value& v);
   
  public:
   //build from JSON value
   CrowdWorld();
-  CrowdWorld( Json::Value w );
-  ~CrowdWorld();
+  CrowdWorld( const Json::Value& w );
+  virtual ~CrowdWorld();
   
   //updates each agent with visibility and collision information
-  void updateAgents();
+  virtual void updateAgents();
 
   //calcs forces for each agent
-  void calcForces();
+  virtual void calcForces();
   
   //applies forces for each agent
-  void stepWorld(float deltaT);
+  virtual void stepWorld(float deltaT);
 
   //output functions
   void print();

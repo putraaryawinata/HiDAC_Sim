@@ -4,26 +4,41 @@ CrowdObject::CrowdObject( ){
 
 }
 
-CrowdObject::CrowdObject( Json::Value c){
+CrowdObject::CrowdObject( const Json::Value& c){
+  // Initialize members first
+  norm[0] = 0.0;
+  norm[1] = 0.0;
+  pos[0] = 0.0;
+  pos[1] = 0.0;
+  myType = AGENT; // default
+  
+  if(c.isNull() || !c.isObject()) {
+    return; // Exit early if invalid JSON
+  }
+  
   std::string s = c["type"].asString();
-  std::string fa = "fallen agent";
-  std::string a = "attractor";
-  std::string w = "wall";
-  std::string ag = "agent";
-  std::string ob = "obstacle";
-  if (s.compare(fa) == 0)
+  
+  if (s == "fallen agent")
     myType = FALLEN_AGENT; 
-  if (s.compare(a) == 0)
+  else if (s == "attractor")
     myType = ATTRACTOR;
-  if (s.compare(w) == 0)
+  else if (s == "wall")
     myType = WALL;
-  if (s.compare(ag) == 0)
+  else if (s == "agent")
     myType = AGENT;
-  if (s.compare(ob) == 0)
+  else if (s == "obstacle")
     myType = OBSTACLE;
 
-  v2fFromJson( c["norm"], norm);
-  v2fFromJson( c["pos"], pos);
+  // Manually set array values instead of using v2fFromJson
+  if(c.isMember("norm") && c["norm"].isArray() && c["norm"].size() >= 2){
+    norm[0] = c["norm"][0u].asDouble();
+    norm[1] = c["norm"][1u].asDouble();
+  }
+  
+  if(c.isMember("pos") && c["pos"].isArray() && c["pos"].size() >= 2){
+    pos[0] = c["pos"][0u].asDouble();
+    pos[1] = c["pos"][1u].asDouble();
+  }
 }
 
 //all methods of CrowdObject will be overridden. 

@@ -7,7 +7,7 @@ Agent::Agent(){
   isColliding = false; 
 }
 
-Agent::Agent( Json::Value a ){
+Agent::Agent( Json::Value a ) : attractor(a["attractor"]) {
   myType = AGENT;
   stopping = false;
   waiting = false; 
@@ -38,10 +38,12 @@ Agent::Agent( Json::Value a ){
 
   //not quite sure how to specify attractor
   //for now we'll just have a CrowdObject contained in the agent
-  attractor = CrowdObject( a["attractor"] );
-  v2fFromJson( a["pos"], pos );
+  // attractor is now initialized in the initialization list
+  pos[0] = a["pos"][0u].asDouble();
+  pos[1] = a["pos"][1u].asDouble();
   if(a.isMember("norm")){
-    v2fFromJson( a["norm"], norm);
+    norm[0] = a["norm"][0u].asDouble();
+    norm[1] = a["norm"][1u].asDouble();
   }
 
   panic = false;
@@ -247,7 +249,7 @@ void crossAndRecross( v2f v1, v2f v2, v2f ret){
 
 }
 
-void Agent::calcAgentForce( CrowdObject::CrowdObject * a , v2f ret){
+void Agent::calcAgentForce( CrowdObject * a , v2f ret){
   v2f meToYou;
   v2f tforce;
   v2f otherVel;
@@ -416,7 +418,7 @@ void Agent::applyForces( float deltaT ){
 }
 
 //functions to update visibility and collision vectors
-void Agent::checkCollide( CrowdObject::CrowdObject * c ){
+void Agent::checkCollide( CrowdObject * c ){
   v2f wallVec;
   c->getDirection( pos, wallVec);
 
@@ -426,7 +428,7 @@ void Agent::checkCollide( CrowdObject::CrowdObject * c ){
   }
 }
 
-void Agent::checkVisible( CrowdObject::CrowdObject * c ){
+void Agent::checkVisible( CrowdObject * c ){
   v2f n; 
   getNorm( n );
   //don't want to look behind ourself, so we'll pass in our position moved forward by our radius

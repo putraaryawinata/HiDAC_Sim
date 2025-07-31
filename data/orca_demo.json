@@ -1,0 +1,94 @@
+{
+  "simulation": {
+    "mode": "orca",
+    "steps": 1000,
+    "timeslice": 0.4,
+    "timeHorizon": 2.0,
+    "neighborDist": 10.0,
+    "maxNeighbors": 10
+  },
+  "agents": [
+    {
+      "pos": [-5.0, -5.0],
+      "vel": [0.0, 0.0],
+      "attractor": {
+        "type": "attractor",
+        "pos": [10.0, 10.0],
+        "norm": [0.0, 0.0]
+      },
+      "radius": 0.5,
+      "maxVel": 1.2,
+      "timeHorizon": 2.0,
+      "neighborDist": 8.0,
+      "maxNeighbors": 8,
+      "mesh": "blue.mesh"
+    },
+    {
+      "pos": [5.0, -5.0],
+      "vel": [0.0, 0.0],
+      "attractor": {
+        "type": "attractor",
+        "pos": [-10.0, 10.0],
+        "norm": [0.0, 0.0]
+      },
+      "radius": 0.5,
+      "maxVel": 1.2,
+      "timeHorizon": 2.0,
+      "neighborDist": 8.0,
+      "maxNeighbors": 8,
+      "mesh": "blue.mesh"
+    },
+    {
+      "pos": [-5.0, 5.0],
+      "vel": [0.0, 0.0],
+      "attractor": {
+        "type": "attractor",
+        "pos": [10.0, -10.0],
+        "norm": [0.0, 0.0]
+      },
+      "radius": 0.5,
+      "maxVel": 1.2,
+      "timeHorizon": 2.0,
+      "neighborDist": 8.0,
+      "maxNeighbors": 8,
+      "mesh": "blue.mesh"
+    },
+    {
+      "pos": [10.0, 10.0],
+      "vel": [0.0, 0.0],
+      "attractor": {
+        "type": "attractor",
+        "pos": [-10.0, -10.0],
+        "norm": [0.0, 0.0]
+      },
+      "radius": 0.5,
+      "maxVel": 1.2,
+      "timeHorizon": 2.0,
+      "neighborDist": 8.0,
+      "maxNeighbors": 8,
+      "mesh": "blue.mesh"
+    }
+  ],
+  "walls": [
+    {
+      "type": "wall",
+      "start": [-15.0, -15.0],
+      "end": [15.0, -15.0]
+    },
+    {
+      "type": "wall", 
+      "start": [15.0, -15.0],
+      "end": [15.0, 15.0]
+    },
+    {
+      "type": "wall",
+      "start": [15.0, 15.0], 
+      "end": [-15.0, 15.0]
+    },
+    {
+      "type": "wall",
+      "start": [-15.0, 15.0],
+      "end": [-15.0, -15.0]
+    }
+  ]
+}

@@ -6,9 +6,9 @@
 #include <fstream> 
 #include <istream>
 #include <iostream>
-#include <jsoncpp/reader.h>
-#include <jsoncpp/value.h>
-#include <jsoncpp/writer.h>
+#include <json/reader.h>
+#include <json/value.h>
+#include <json/writer.h>
 #include <stdio.h>
 #include <time.h>
 #include <signal.h>
@@ -22,10 +22,18 @@ void writeJsonToFile(Json::Value v, const char * file);
 Json::Value readJsonFromFile(const char * file){
   Json::Reader reader;
   Json::Value root;
-  std::ifstream::basic_ifstream data_file;
+  std::ifstream data_file;
   data_file.open( file);
+  
+  if (!data_file.is_open()) {
+    std::cout << "Could not open file: " << file << std::endl;
+    exit(1);
+  }
+  
   std::string the_str ( std::istreambuf_iterator<char>( data_file ),
 			(std::istreambuf_iterator<char>() ) );
+  
+  data_file.close();
 
   bool success = reader.parse(the_str , root );
 
@@ -58,12 +66,11 @@ int main( int argc, char ** argv){
   std::srand(0);
   int steps = data["steps"].asInt();
   float deltat = data["timeslice"].asDouble();
-  Agent::Agent * a = new Agent;
-  *a = Agent(data["agents"][0u]);
-  Render::Render * r = Render::getInstance();
-  CrowdObject::CrowdObject * cos;
+  Agent * a = new Agent(data["agents"][0u]);
+  Render * r = Render::getInstance();
+  CrowdObject * cos;
   cos = twoWalls(data["walls"][0u]);
-  CrowdWorld::CrowdWorld c(data);
+  CrowdWorld c(data);
   while(! r->isInitialized() ){
 
   }

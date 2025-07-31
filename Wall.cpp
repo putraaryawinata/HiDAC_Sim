@@ -125,11 +125,13 @@ void Wall::getVelocity( v2f ret ){
   v2fMult( ret, 0.0, ret );
 }
 
-Wall::Wall * twoWalls( Json::Value w){
+Wall * twoWalls( Json::Value w){
   v2f st, en;
-  v2fFromJson( w["start"], st);
-  v2fFromJson( w["end"], en);
-  Wall::Wall * ws = new Wall::Wall[2];
+  st[0] = w["start"][0u].asDouble();
+  st[1] = w["start"][1u].asDouble();
+  en[0] = w["end"][0u].asDouble();
+  en[1] = w["end"][1u].asDouble();
+  Wall * ws = new Wall[2];
   ws[0] = Wall(st, en);
   ws[1] = Wall(en, st);
 
